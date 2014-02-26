@@ -51,7 +51,7 @@ namespace Galleriet.Model
         public string SaveImage(Stream stream, string fileName)
         {
             var image = System.Drawing.Image.FromStream(stream);
-            var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
+            var thumbnail = image.GetThumbnailImage(90, 90, null, System.IntPtr.Zero);
 
             if (!IsValidImage(image))
             {
