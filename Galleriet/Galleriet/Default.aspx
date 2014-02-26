@@ -15,7 +15,7 @@
     <div>
         <asp:Repeater ID="RepeaterImages" runat="server" SelectMethod="GetImages">
            <ItemTemplate>
-               <asp:HyperLink ID="HyperLink" runat="server" ImageUrl='<%# string.Format("~/Content/Images/Thumbnails/{0}", Container.DataItem) %>'></asp:HyperLink>
+               <asp:HyperLink ID="HyperLink" NavigateUrl='<%# string.Format("?img={0}", Container.DataItem) %>' runat="server" ImageUrl='<%# string.Format("~/Content/Images/Thumbnails/{0}", Container.DataItem) %>'></asp:HyperLink>
             </ItemTemplate>
         </asp:Repeater>
     </div>

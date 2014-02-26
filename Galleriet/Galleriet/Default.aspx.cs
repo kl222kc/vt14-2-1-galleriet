@@ -14,8 +14,14 @@ namespace Galleriet
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ImagePlaceholder.ImageUrl = "Content/Images/cykel.jpg";
-            ImagePlaceholder.Visible = true;
+
+            var query = Request.QueryString["img"];
+
+            if (Request.QueryString["img"] != null)
+            {
+                ImagePlaceholder.ImageUrl = "Content/Images/" + query;
+                ImagePlaceholder.Visible = true;
+            }
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)
