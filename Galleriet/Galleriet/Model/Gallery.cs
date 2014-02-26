@@ -22,8 +22,15 @@ namespace Galleriet.Model
 
         public IEnumerable<string> GetImageNames()
         {
-            List<string> temp = new List<string>();
-            return temp;
+            string[] filesindirectory = Directory.GetFiles(PhysicalUploadImagePath);
+            List<String> images = new List<string>(filesindirectory.Count());
+
+            foreach (string item in filesindirectory)
+            {
+                images.Add(String.Format(Path.GetFileName(item)));
+            }
+
+            return images.AsEnumerable();
         }
 
         public bool ImageExists(string name)
@@ -41,7 +48,6 @@ namespace Galleriet.Model
             var image = System.Drawing.Image.FromStream(stream);
             var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
 
-            
             image.Save(Path.Combine(PhysicalUploadImagePath, fileName));
             thumbnail.Save(Path.Combine(PhysicalUploadImagePath + "/Thumbnails", fileName));
 

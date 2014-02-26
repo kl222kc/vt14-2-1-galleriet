@@ -11,19 +11,11 @@ namespace Galleriet
 {
     public partial class Default : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            string[] filesindirectory = Directory.GetFiles(Server.MapPath("~/Content/Images/Thumbnails"));
-            List<String> images = new List<string>(filesindirectory.Count());
-
-            foreach (string item in filesindirectory)
-            {
-                images.Add(String.Format("~/Content/Images/Thumbnails/{0}", System.IO.Path.GetFileName(item)));
-            }
-
-            RepeaterImages.DataSource = images;
-            RepeaterImages.DataBind();
+            ImagePlaceholder.ImageUrl = "Content/Images/cykel.jpg";
+            ImagePlaceholder.Visible = true;
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)
@@ -33,6 +25,11 @@ namespace Galleriet
                 Gallery gallery = new Gallery();
                 gallery.SaveImage(FileUpload.FileContent, FileUpload.FileName);
             }
+        }
+        public IEnumerable<System.String> GetImages()
+        {
+            Gallery gallery = new Gallery();
+            return  gallery.GetImageNames();
         }
     }
 }

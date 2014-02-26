@@ -10,10 +10,12 @@
     <form id="form1" runat="server">
         <h1>Galleriet</h1>
 
+        <asp:Image ID="ImagePlaceholder" runat="server" Visible="false"/>
+
     <div>
-        <asp:Repeater ID="RepeaterImages" runat="server">
+        <asp:Repeater ID="RepeaterImages" runat="server" SelectMethod="GetImages">
            <ItemTemplate>
-               <asp:Image ID="Image" runat="server" ImageUrl='<%# Container.DataItem %>' />
+               <asp:HyperLink ID="HyperLink" runat="server" ImageUrl='<%# string.Format("~/Content/Images/Thumbnails/{0}", Container.DataItem) %>'></asp:HyperLink>
             </ItemTemplate>
         </asp:Repeater>
     </div>
