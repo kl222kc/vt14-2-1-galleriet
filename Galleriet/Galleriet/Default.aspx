@@ -11,7 +11,7 @@
         <h1>Galleriet</h1>
     <div>
         <asp:FileUpload ID="FileUpload" runat="server" />
-        <asp:Button ID="UploadButton" runat="server" Text="Button" />
+        <asp:Button ID="UploadButton" runat="server" Text="Button" OnClick="UploadButton_Click" />
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="error" runat="server" ErrorMessage="En fil måste väljas." ControlToValidate="FileUpload" Text="*"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" CssClass="error" runat="server" ErrorMessage="Filen måste vara av typen gif,jpg eller png." ControlToValidate="FileUpload" Text="*" ValidationExpression="^.*\.(jpg|JPG|gif|GIF|png|PNG)$"></asp:RegularExpressionValidator>
     </div>
