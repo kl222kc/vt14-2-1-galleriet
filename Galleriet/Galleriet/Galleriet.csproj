@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Scripts\Gallery.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

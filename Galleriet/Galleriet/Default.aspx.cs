@@ -31,6 +31,8 @@ namespace Galleriet
                 Gallery gallery = new Gallery();
                 gallery.SaveImage(FileUpload.FileContent, FileUpload.FileName);
             }
+
+            UploadSuccess.Visible = true;
         }
         public IEnumerable<System.String> GetImages()
         {

@@ -8,7 +8,12 @@
     <link href="Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="cointaner">
+    
+    <asp:Panel ID="UploadSuccess" runat="server" Text="Upladdningen lyckades!" Visible="false">
+        <p id="success">Upladdningen lyckades!</p>
+    </asp:Panel>
+
+        <div id="cointaner">
         <form id="form1" runat="server">
 
     <div id="header">
@@ -39,5 +44,7 @@
         
     </form>
      </div>
+    <script src="Scripts/jquery-1.11.0.min.js"></script>
+    <script src="Scripts/Gallery.js"></script>
 </body>
 </html>
