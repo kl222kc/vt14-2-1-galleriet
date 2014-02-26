@@ -16,8 +16,11 @@ namespace Galleriet.Model
         private static readonly Regex SantizePath;
 
         static Gallery()
-        {
+        {   
+            ApprovedExenstions = new Regex("^.*\.(gif|jpg|png)$");
             PhysicalUploadImagePath = Path.Combine(AppDomain.CurrentDomain.GetData("APPBASE").ToString(), @"Content/Images");
+            var invalidChars = new string(Path.GetInvalidFileNameChars());
+            SantizePath = new Regex(string.Format("[{0}]", Regex.Escape(invalidChars)));
         }
 
         public IEnumerable<string> GetImageNames()
@@ -68,6 +71,13 @@ namespace Galleriet.Model
                 {
                     fileName = string.Format("{0}({1}){2}", fileNameNoExt, count++, extension);
                 }
+            }
+
+            SantizePath.Replace(fileName,"_");
+
+            if (fileName != ApprovedExenstions.Match(fileName).ToString())
+            {
+                throw new ArgumentException("Bilden har inte en giltlig filändelse");
             }
 
             image.Save(Path.Combine(PhysicalUploadImagePath, fileName));
