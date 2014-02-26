@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,6 +14,16 @@ namespace Galleriet
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            string[] filesindirectory = Directory.GetFiles(Server.MapPath("~/Content/Images/Thumbnails"));
+            List<String> images = new List<string>(filesindirectory.Count());
+
+            foreach (string item in filesindirectory)
+            {
+                images.Add(String.Format("~/Content/Images/Thumbnails/{0}", System.IO.Path.GetFileName(item)));
+            }
+
+            RepeaterImages.DataSource = images;
+            RepeaterImages.DataBind();
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)

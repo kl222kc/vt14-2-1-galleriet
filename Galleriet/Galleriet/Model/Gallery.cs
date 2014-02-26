@@ -39,8 +39,11 @@ namespace Galleriet.Model
         public string SaveImage(Stream stream, string fileName)
         {
             var image = System.Drawing.Image.FromStream(stream);
+            var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
 
+            
             image.Save(Path.Combine(PhysicalUploadImagePath, fileName));
+            thumbnail.Save(Path.Combine(PhysicalUploadImagePath + "/Thumbnails", fileName));
 
             return fileName;
         }

@@ -9,6 +9,15 @@
 <body>
     <form id="form1" runat="server">
         <h1>Galleriet</h1>
+
+    <div>
+        <asp:Repeater ID="RepeaterImages" runat="server">
+           <ItemTemplate>
+               <asp:Image ID="Image" runat="server" ImageUrl='<%# Container.DataItem %>' />
+            </ItemTemplate>
+        </asp:Repeater>
+    </div>
+
     <div>
         <asp:FileUpload ID="FileUpload" runat="server" />
         <asp:Button ID="UploadButton" runat="server" Text="Button" OnClick="UploadButton_Click" />
