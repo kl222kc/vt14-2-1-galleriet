@@ -35,18 +35,40 @@ namespace Galleriet.Model
 
         public bool ImageExists(string name)
         {
-            return true;
+            return File.Exists(Path.Combine(PhysicalUploadImagePath, name));
         }
 
         public bool IsValidImage(Image image)
         {
-            return true;
+            if (image.RawFormat.Guid == ImageFormat.Gif.Guid || image.RawFormat.Guid == ImageFormat.Jpeg.Guid || image.RawFormat.Guid == ImageFormat.Png.Guid)
+	        {
+		        return true;
+	        }
+
+            return false;
         }
 
         public string SaveImage(Stream stream, string fileName)
         {
             var image = System.Drawing.Image.FromStream(stream);
             var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
+
+            if (!IsValidImage(image))
+            {
+                throw new ArgumentException("Bilden är inte giltlig");
+            }
+
+            if (ImageExists(fileName))
+            {
+                int count = 1;
+                string fileNameNoExt = Path.GetFileNameWithoutExtension(fileName);
+                string extension = Path.GetExtension(fileName);
+
+                while (ImageExists(fileName))
+                {
+                    fileName = string.Format("{0}({1}){2}", fileNameNoExt, count++, extension);
+                }
+            }
 
             image.Save(Path.Combine(PhysicalUploadImagePath, fileName));
             thumbnail.Save(Path.Combine(PhysicalUploadImagePath + "/Thumbnails", fileName));
